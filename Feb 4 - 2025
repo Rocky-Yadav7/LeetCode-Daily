@@ -1,0 +1,30 @@
+
+Question 1800: Maximum Ascending Subarray Sum
+
+Code:
+class Solution {
+    public int maxAscendingSum(int[] nums) {
+
+        int len  = nums.length;
+        int[] arr = new int[len+1];
+        arr[len] = 0;
+
+        for(int i = 0;i<len;i++){
+            arr[i] = nums[i];
+        }       
+
+        int ans = Integer.MIN_VALUE;
+        int curr = 0;
+        for(int i = 0;i<arr.length - 1;i++){
+
+            curr+=arr[i];
+            ans = Math.max(ans , curr);
+            if(arr[i]>=arr[i+1]){
+                curr = 0;
+            }
+
+        }
+
+        return ans;
+    }
+}
