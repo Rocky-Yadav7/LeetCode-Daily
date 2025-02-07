@@ -3,38 +3,35 @@ Question 3160: Find the Number of Distinct Colors Among the Balls
 
 Code:
 class Solution {
-
     public int[] queryResults(int limit, int[][] queries) {
-        int n = queries.length;
-        int[] result = new int[n];
-        Map<Integer, Integer> colorMap = new HashMap<>();
-        int[] ballArray = new int[limit + 1];
+        
+        int[] result = new int[queries.length];
+        Map<Integer , Integer> map = new HashMap<>();
+        Map<Integer , Integer> color = new HashMap<>();
 
-        // Iterate through queries
-        for (int i = 0; i < n; i++) {
-            // Extract ball label and color from query
+        for(int i = 0;i<queries.length;i++){
+
             int ball = queries[i][0];
-            int color = queries[i][1];
+            int col = queries[i][1];
 
-            // Check if ball is already colored
-            if (ballArray[ball] != 0) {
-                // Decrement count of the previous color on the ball
-                int prevColor = ballArray[ball];
-                colorMap.put(prevColor, colorMap.get(prevColor) - 1);
+            if(color.containsKey(ball)){
 
-                // If there are no balls with previous color left, remove color from color map
-                if (colorMap.get(prevColor) == 0) {
-                    colorMap.remove(prevColor);
+                int prev = color.get(ball);
+
+                map.put(prev , map.get(prev) -1);
+                if(map.get(prev)==0){
+                    map.remove(prev);
                 }
             }
-            // Set color of ball to the new color
-            ballArray[ball] = color;
 
-            // Increment the count of the new color
-            colorMap.put(color, colorMap.getOrDefault(color, 0) + 1);
+            color.put(ball , col);
 
-            result[i] = colorMap.size();
+            map.put(col , map.getOrDefault(col , 0)+1);
+            result[i] = map.size();
         }
+
         return result;
+
+
     }
 }
