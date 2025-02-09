@@ -1,0 +1,23 @@
+
+Question 2364: Count Number of Bad Pairs
+
+Code:
+class Solution {
+    public long countBadPairs(int[] nums) {
+        long count = 0;
+        int len = nums.length;
+
+        long total = (long) len * (len - 1) / 2; 
+        Map<Integer, Integer> map = new HashMap<>();
+        int i = 0;
+        
+        for (int num : nums) {
+            int diff = num - i;
+            count += map.getOrDefault(diff, 0); 
+            map.put(diff, map.getOrDefault(diff, 0) + 1);
+            i++;
+        }
+        
+        return total - count; 
+    }
+}
