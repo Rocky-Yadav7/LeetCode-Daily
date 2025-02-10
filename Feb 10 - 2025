@@ -1,0 +1,26 @@
+
+Question 3174: Clear Digits
+
+Code : 
+class Solution {
+    public String clearDigits(String s) {
+
+        List<Character> list = new ArrayList<>();
+        for(char ch : s.toCharArray()){
+
+            if(ch >= '0' && ch<= '9'){
+                list.removeLast();
+                continue;
+            }
+
+            list.add(ch);
+        }
+
+        StringBuilder str = new StringBuilder();
+        for(char ch : list){
+            str.append(ch);
+        }
+
+        return str.toString();
+    }
+}
