@@ -1,7 +1,7 @@
+Question 1910: Remove All Occurrences of a Substring
 
 
-
-
+Code :
 class Solution {
 
     public String removeOccurrences(String s, String part) {
