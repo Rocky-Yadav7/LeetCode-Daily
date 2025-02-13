@@ -1,0 +1,33 @@
+Question 3066: Minimum Operations to Exceed Threshold Value II
+
+
+Code:
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        
+
+        PriorityQueue<Long> que = new PriorityQueue<>();
+        for(int num : nums){
+            que.add((long)num);
+        }
+
+        if(que.peek()>=k) return 0;
+        int ans= 0;
+
+        while(!que.isEmpty()){
+            long x = que.poll();
+
+            if(que.isEmpty()) break;
+            long y = que.poll();
+
+            if(x>=k) break;
+
+            long num = Math.min(x , y)*2 + Math.max(x , y);
+            que.add(num);
+            ans++;
+
+        }
+
+        return ans;
+    }
+}
