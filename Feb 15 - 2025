@@ -1,0 +1,40 @@
+Question 2698: Find the Punishment Number of an Integer
+
+
+Code:
+class Solution {
+    private Map<String, Boolean> memo = new HashMap<>();
+
+    private boolean canMake(String stream, int remain) {
+        if (remain == 0) {
+            return stream.isEmpty() || Integer.parseInt(stream) == 0;
+        }
+        String key = stream + "," + remain;
+        if (memo.containsKey(key)) {
+            return memo.get(key);
+        }
+        for (int i = 1; i <= stream.length(); i++) {
+            int num1 = Integer.parseInt(stream.substring(0, i));
+            if (num1 > remain) {
+                break;
+            }
+            if (canMake(stream.substring(i), remain - num1)) {
+                memo.put(key, true);
+                return true;
+            }
+        }
+        memo.put(key, false);
+        return false;
+    }
+
+    public int punishmentNumber(int n) {
+        int res = 0;
+        for (int i = 1; i <= n; i++) {
+            String squareStr = String.valueOf(i * i);
+            if (canMake(squareStr, i)) {
+                res += i * i;
+            }
+        }
+        return res;
+    }
+}
