@@ -1,0 +1,34 @@
+Question 1079: Letter Tile Possibilities
+
+
+Code:
+class Solution {
+
+    public int comb(String str , String prem , Set<String> set){
+
+        if(!set.contains(prem)){
+            set.add(prem);
+        }else{
+            set = new HashSet();
+            set.add(prem);
+        }
+
+        for(int i = 0;i<str.length();i++){
+            String ch = str.substring(i, i+1);
+            String newStr = str.substring(0 , i) + str.substring(i+1);
+            comb(newStr , prem+ch , set);
+        }
+
+        return set.size();
+
+    }
+    public int numTilePossibilities(String tiles) {
+
+        if(tiles.length()==1) return 1;
+        Set<String> set = new HashSet<>();
+
+        int ans = comb(tiles , "" , set);
+
+        return ans-1;
+    }
+}
