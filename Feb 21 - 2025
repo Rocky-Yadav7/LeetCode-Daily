@@ -1,0 +1,54 @@
+Question 1261: Find Elements in a Contaminated Binary Tree
+
+
+Code:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class FindElements {
+
+    TreeNode root;
+    List<Integer> list = new ArrayList<>();
+
+    public FindElements(TreeNode root) {
+
+        this.root = root;
+        construct(root , 0);
+
+            
+    }
+
+    public void construct(TreeNode node , int val){
+
+        node.val = val;
+        list.add(val);
+        if(node.left!=null) construct(node.left , val*2 +1);
+        if(node.right!=null) construct(node.right , val*2 +2);
+    }
+    
+    public boolean find(int target) {
+
+        
+        return list.contains(target);
+    }
+
+    
+}
+
+/**
+ * Your FindElements object will be instantiated and called as such:
+ * FindElements obj = new FindElements(root);
+ * boolean param_1 = obj.find(target);
+ */
