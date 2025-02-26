@@ -1,0 +1,45 @@
+Question 1749: Maximum Absolute Sum of Any Subarray
+
+
+Code:
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        
+        int n = nums.length;
+        int[] dp_max = new int[n];
+
+        dp_max[0] = nums[0];
+
+        int max = Integer.MIN_VALUE;
+
+
+        for(int i = 1;i<n;i++){
+
+            max = Math.max(dp_max[i-1]+nums[i] , nums[i]);
+            dp_max[i] = max;
+
+        }
+
+        int[] dp_min = new int[n];
+        dp_min[0] = nums[0];
+
+        int min = Integer.MAX_VALUE;
+
+        for(int i = 1;i<n;i++){
+
+            min = Math.min(dp_min[i-1]+nums[i] , nums[i]);
+            dp_min[i] = min;
+
+        } 
+
+        int ans = 0;
+        for(int i = 0;i<n;i++){
+
+            int val = Math.max(dp_max[i] , Math.abs(dp_min[i]));
+
+            ans = Math.max(ans , val);
+        }
+
+        return ans;
+    }
+}
