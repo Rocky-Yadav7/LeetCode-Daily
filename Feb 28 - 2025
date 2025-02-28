@@ -1,0 +1,45 @@
+Question 1092: Shortest Common Supersequence 
+
+
+Code:
+class Solution {
+
+    public String shortestCommonSupersequence(String str1, String str2) {
+        int len1 = str1.length();
+        int len2 = str2.length();
+
+        
+        String[] prev = new String[len2 + 1];
+        for (int col = 0; col <= len2; col++) {
+            prev[col] = str2.substring(0, col);
+        }
+
+        
+        for (int row = 1; row <= len1; row++) {
+            
+            String[] curr = new String[len2 + 1];
+            curr[0] = str1.substring(0, row);
+
+            for (int col = 1; col <= len2; col++) {
+                
+                if (str1.charAt(row - 1) == str2.charAt(col - 1)) {
+                    curr[col] = prev[col - 1] + str1.charAt(row - 1);
+                } else {
+                    
+                    String st1 = prev[col];
+                    
+                    String st2 = curr[col - 1];
+
+                    curr[col] = (st1.length() < st2.length())
+                        ? st1 + str1.charAt(row - 1)
+                        : st2 + str2.charAt(col - 1);
+                }
+            }
+            
+            prev = curr;
+        }
+
+        
+        return prev[len2];
+    }
+}
