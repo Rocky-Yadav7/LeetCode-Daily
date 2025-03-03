@@ -1,0 +1,32 @@
+Question 2161: Partition Array According to Given Pivot
+
+
+Code:
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        
+        List<Integer> small = new ArrayList<>();
+        List<Integer> greater = new ArrayList<>();
+
+        for(int num : nums){
+
+            if(num<pivot) small.add(num);
+
+            if(num>pivot) greater.add(num);
+
+            if(num==pivot) greater.add(0 , num);
+        }
+
+        int k = -1;
+
+        for(int num : small){
+            nums[++k] = num;
+        }
+
+        for(int num : greater){
+            nums[++k] = num;
+        }
+
+        return nums;
+    }
+}
