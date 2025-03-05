@@ -1,0 +1,24 @@
+Question 2579: Count Total Number of Colored Cells
+
+
+Code:
+class Solution {
+    public long coloredCells(int n) {
+        
+        long ans = 0;
+        long incr= 0;
+
+        for(int i = 1;i<=n;i++){
+
+            if(i==1){
+                ans = 1;
+                incr += 4;
+            }else{
+                ans += incr;
+                incr += 4;
+            }
+        }
+
+        return ans;
+    }
+}
