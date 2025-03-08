@@ -1,0 +1,28 @@
+Question 2379: Minimum Recolors to Get K Consecutive Black Blocks
+
+
+Code:
+class Solution {
+    public int minimumRecolors(String blocks, int k) {
+        
+
+        int left = 0;
+        int numw = 0;
+        int ans = Integer.MAX_VALUE;
+
+        for(int right = 0;right<blocks.length(); right++){
+
+            if(blocks.charAt(right)=='W'){
+                numw++;
+            }
+
+            if(right - left +1==k){
+                ans = Math.min(ans , numw);
+                if(blocks.charAt(left)=='W') numw--;
+                left++;
+            }
+        }
+
+        return ans;
+    }
+}
