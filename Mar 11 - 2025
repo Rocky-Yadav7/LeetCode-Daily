@@ -1,0 +1,35 @@
+Question 1358: Number of Substrings Containing All Three Characters
+
+
+Code:
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int count  = 0;
+        int left = 0 , right = 0;
+
+        int[] freq = new int[3];
+        for(char ch : s.toCharArray()){
+            freq[ch - 'a']++
+        }
+
+        while(right<s.length()){
+
+            while(chars(freq)){
+
+                count+= len - right;
+                char ch = s.charAt(left);
+                freq[ch -'a']--;
+                left++;
+
+            }
+
+            right++;
+        }
+
+        return count;
+    }
+
+    boolean chars(int[] freq){
+        return freq[0]>0 && freq[1]>0 && freq[2]>0;
+    }
+}
