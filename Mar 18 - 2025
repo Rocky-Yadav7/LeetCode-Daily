@@ -1,0 +1,28 @@
+Question 2401: Longest Nice Subarray
+
+
+Code:
+class Solution {
+    public int longestNiceSubarray(int[] nums) {
+        
+        int st = 0;
+        int len = 0;
+        int used = 0;
+
+        for(int end = 0;end<nums.length;end++){
+
+            while((used & nums[end])!=0){
+
+                used^= nums[st];
+                st++;
+            }
+
+            used|= nums[end];
+
+            len = Math.max(len , end - st +1);
+        }
+
+        return len;
+
+    }
+}
