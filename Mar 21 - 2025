@@ -1,0 +1,40 @@
+Question 2115: Find All Possible Recipes from Given Supplies
+
+
+Code:
+class Solution {
+    public List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
+        
+        Set<String> set = new HashSet<>();
+        for(String str : supplies) set.add(str);
+
+        List<String> ans = new ArrayList<>();
+
+        boolean more = true;
+
+        while(more){
+
+            more = false;
+            for(int i = 0;i<recipes.length;i++){
+
+                if(set.contains(recipes[i])) continue;
+                boolean possible = true;
+
+                for(String str : ingredients.get(i)){
+                    if(!set.contains(str)){
+                        possible = false;
+                        break;
+                    }
+                }
+
+                if(possible){
+                    ans.add(recipes[i]);
+                    set.add(recipes[i]);
+                    more = true;
+                }
+            }
+        }
+
+        return ans;
+    }
+}
