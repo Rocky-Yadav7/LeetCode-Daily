@@ -1,0 +1,77 @@
+Question 2685: Count the Number of Complete Components
+
+
+Code:
+class Solution {
+        
+        Map<Integer , List<Integer>> adjmap;
+        Set<Integer> visited;
+
+        Solution(){
+            adjmap = new HashMap<>();
+            visited = new HashSet<>();
+        }
+
+        public void add(int u , int v){
+            adjmap.computeIfAbsent(u , k -> new ArrayList()).add(v);
+            adjmap.computeIfAbsent(v , k -> new ArrayList()).add(u);
+        }
+
+        public int helper(int n){
+
+            int count = 0;
+            Queue<Integer> que = new LinkedList<>();
+
+            for(int i = 0;i<n;i++){
+
+                if(visited.contains(i)){
+                    continue;
+                }else{
+                    que.add(i);
+                    visited.add(i);
+
+                    int vcount = 0;
+                    int ecount = 0;
+                    Set<String> uniqueEdges = new HashSet<>();
+
+                    while(!que.isEmpty()){
+                        int val = que.poll();
+                        vcount++;
+
+                        for(int num : adjmap.getOrDefault(val , new ArrayList<>())){
+
+                            String edgeKey = Math.min(val, num) + "," + Math.max(val, num);
+                    
+                            if (!uniqueEdges.contains(edgeKey)) {
+                                uniqueEdges.add(edgeKey);
+                                ecount++;
+                            }
+
+                            if(!visited.contains(num)){
+                                visited.add(num);
+                                que.add(num);
+                            }
+                        }
+                    }
+
+                    int edge = (vcount*(vcount - 1))/2;
+
+                    if(ecount==edge) count++;
+                }
+            }
+
+            return count;
+
+        }
+
+    public int countCompleteComponents(int n, int[][] edges) {
+
+        for(int[] arr : edges){
+            add(arr[0] , arr[1]);
+        }
+
+        int ans = helper(n);
+
+        return ans;
+    }
+}
