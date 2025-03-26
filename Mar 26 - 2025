@@ -1,0 +1,39 @@
+Question 2033: Minimum Operations to Make a Uni-Value Grid
+
+
+Code:
+class Solution {
+    public int minOperations(int[][] grid, int x) {
+
+        int m = grid.length;
+        int n = grid[0].length;
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for(int i = 0;i<m;i++){
+            for(int j = 0;j<n;j++){
+
+                list.add(grid[i][j]);
+            }
+        }
+
+        Collections.sort(list);
+
+        int len = list.size();
+
+        int pivot = list.get(len/2);
+        int ops = 0;
+
+        for(int num : list){
+
+            if(num%x != pivot%x){
+                return -1;
+            }
+
+            ops+= Math.abs(pivot - num)/x;
+        }
+
+        return ops;
+
+    }
+}
