@@ -1,0 +1,31 @@
+Question 2874: Maximum Value of an Ordered Triplet II
+
+
+Code:
+class Solution {
+    public long maximumTripletValue(int[] nums) {
+        
+        long max = 0;
+        int[] max_pre = new int[nums.length];
+        int[] max_suf = new int[nums.length];
+
+        max_pre[0] = nums[0];
+        for(int i = 1;i<nums.length;i++){
+
+            max_pre[i] = Math.max(max_pre[i-1] , nums[i]);
+        }
+
+        max_suf[nums.length - 1] = nums[nums.length - 1];
+        for(int i = nums.length - 2;i>=0;i--){
+
+            max_suf[i] = Math.max(max_suf[i+1] , nums[i]);
+        }
+
+        for(int i = 1;i<nums.length - 1;i++){
+
+            max = Math.max(max ,(long) (max_pre[i-1] - nums[i])*max_suf[i+1]);
+        }
+
+        return (max<0) ? 0 : max;
+    }
+}
